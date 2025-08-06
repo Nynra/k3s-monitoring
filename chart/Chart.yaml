@@ -1,0 +1,12 @@
+apiVersion: v2
+name: k3s-monitoring
+description: A Helm chart that deploys the K3S monitoring stack.
+type: application
+version: "0.0.1"
+dependencies:
+- name: k3s-prometheus-stack
+  version: "0.0.1"
+  repository: file://./charts/k3s-prometheus-stack
+- name: k3s-grafana
+  version: "0.0.1"
+  repository: file://./charts/k3s-grafana
