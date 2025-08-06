@@ -65,8 +65,8 @@ kube-prometheus-stack:
     sidecar:
       dashboards: 
         enabled: true 
-        label: grafana_dashboard
-        labelValue: "true"
+        # label: grafana_dashboard
+        # labelValue: "true"
         searchNamespace: "all"
         # Support for new table panels, when enabled grafana auto migrates the old table panels to newer table panels
         enableNewTablePanelSyntax: false
