@@ -155,7 +155,7 @@ loki-stack:
     enabled: true
     # Keep on false as prometheus is our default datasource
     isDefault: false
-    url: http://loki:{{ .Values.loki.service.port }}
+    # url: http://{{ .Release.Name }}.:{{ .Values.loki.service.port }}
     readinessProbe:
       httpGet:
         path: /ready
@@ -175,8 +175,8 @@ loki-stack:
     config:
       logLevel: info
       serverPort: 3101
-      clients:
-        - url: http://promtail:3100/loki/api/v1/push
+      # clients:
+      #   - url: http://promtail:3100/loki/api/v1/push
 
   fluent-bit:
     enabled: false
@@ -187,7 +187,7 @@ loki-stack:
   prometheus:
     enabled: false
     isDefault: false
-    url: http://{{ include "prometheus.fullname" .}}:{{ .Values.prometheus.server.service.servicePort }}{{ .Values.prometheus.server.prefixURL }}
+    # url: http://{{ include "prometheus.fullname" .}}:{{ .Values.prometheus.server.service.servicePort }}{{ .Values.prometheus.server.prefixURL }}
     datasource:
       jsonData: "{}"
 
