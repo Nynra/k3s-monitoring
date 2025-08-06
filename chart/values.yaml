@@ -1,8 +1,9 @@
-k3s-prometheus-stack:
-  enabled: false 
-
-k3s-grafana-agent:
+alloy:
   enabled: true
-
-k3s-loki-stack:
-  enabled: false
+  configMap:
+    content: |-
+      // Write your Alloy config here:
+      logging {
+        level = "info"
+        format = "logfmt"
+      }
