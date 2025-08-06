@@ -19,6 +19,8 @@ grafanaIngress:
 
 kube-prometheus-stack:
   enabled: true
+
+  nameOverride: "kube-prometheus-stack"
   grafana:
     # Grafana is a dependancy of the kube-prometheus-stack chart, so we can configure it here
     # and all values will be directed towards the grafana chart.
@@ -64,7 +66,6 @@ kube-prometheus-stack:
         label: grafana_dashboard
         labelValue: "true"
         searchNamespace: "all"
-
         # Support for new table panels, when enabled grafana auto migrates the old table panels to newer table panels
         enableNewTablePanelSyntax: false
 
@@ -73,11 +74,8 @@ kube-prometheus-stack:
 
       datasources: 
         enabled: true 
-        defaultDatasourceEnabled: true
-        isDefaultDatasource: true
-
-        name: Prometheus
-        uid: prometheus
+        defaultDatasourceEnabled: false
+        isDefaultDatasource: false
 
         # If not defined, will use prometheus.prometheusSpec.scrapeInterval or its default
         # defaultDatasourceScrapeInterval: 15s
@@ -89,7 +87,7 @@ kube-prometheus-stack:
           handleGrafanaManagedAlerts: false
           implementation: prometheus
 
-    additionalDataSources: []
+    additionalDataSources:
       # - name: prometheus-sample
       #   access: proxy
       #   basicAuth: true
@@ -103,6 +101,24 @@ kube-prometheus-stack:
       #   type: prometheus
       #   url: https://{{ printf "%s-prometheus.svc" .Release.Name }}:9090
       #   version: 1
+      - name: Prometheus 
+        type: prometheus
+        url: http://{{ .Values.kube-prometheus-stack.nameOverride }}-prometheus.{{ .Release.Namespace }}:9090/
+        basicAuth: false
+        basicAuthUser:
+        basicAuthPassword:
+        isDefault: true
+        editable: true
+        jsonData:
+          # graphiteVersion: "1.1"
+          tlsAuth: false
+          tlsAuthWithCACert: false
+      - name: Loki
+        type: loki
+        url: http://{{ .Release.Name }}-loki.{{ .Release.Namespace }}:3100/
+        basicAuth: false
+        basicAuthUser:
+        access: proxy
 
     # Flag to mark provisioned data sources for deletion if they are no longer configured.
     # It takes no effect if data sources are already listed in the deleteDatasources section.
@@ -159,7 +175,7 @@ loki-stack:
     auth_enabled: false
     # Keep on false as prometheus is our default datasource
     isDefault: false
-    url: http://{{(include "loki.serviceName" .)}}-loki.{{ .Release.Namespace }}.svc.cluster.local
+    # url: http://{{(include "loki.serviceName" .)}}-loki.{{ .Release.Namespace }}.svc.cluster.local
     readinessProbe:
       httpGet:
         path: /ready
@@ -179,8 +195,8 @@ loki-stack:
     config:
       logLevel: info
       serverPort: 3101
-      clients:
-        - url: http://{{ .Release.Name }}-loki.{{ .Release.Namespace }}.svc.cluster.local/loki/api/v1/push
+      # clients:
+        # - url: http://{{ .Release.Name }}-loki.{{ .Release.Namespace }}.svc.cluster.local/loki/api/v1/push
 
   fluent-bit:
     enabled: false
@@ -190,22 +206,9 @@ loki-stack:
 
   prometheus:
     enabled: false
-    isDefault: false
-    # url: http://{{ include "prometheus.fullname" .}}:{{ .Values.prometheus.server.service.servicePort }}{{ .Values.prometheus.server.prefixURL }}
-    datasource:
-      jsonData: "{}"
 
   filebeat:
     enabled: false
 
   logstash:
     enabled: false
-
-  # proxy is currently only used by loki test pod
-  # Note: If http_proxy/https_proxy are set, then no_proxy should include the
-  # loki service name, so that tests are able to communicate with the loki
-  # service.
-  proxy:
-    http_proxy: ""
-    https_proxy: ""
-    no_proxy: ""
