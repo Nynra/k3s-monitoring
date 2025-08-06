@@ -146,15 +146,16 @@ kube-prometheus-stack:
       #      selector: {}
 
 loki-stack:
-  enabled: false 
+  enabled: true 
 
   test_pod:
     enabled: true
 
   loki:
     enabled: true
-    isDefault: true
-    url: http://{{(include "loki.serviceName" .)}}:{{ .Values.loki.service.port }}
+    # Keep on false as prometheus is our default datasource
+    isDefault: false
+    url: http://loki:{{ .Values.loki.service.port }}
     readinessProbe:
       httpGet:
         path: /ready
@@ -175,7 +176,7 @@ loki-stack:
       logLevel: info
       serverPort: 3101
       clients:
-        - url: http://{{ .Release.Name }}:3100/loki/api/v1/push
+        - url: http://promtail:3100/loki/api/v1/push
 
   fluent-bit:
     enabled: false
