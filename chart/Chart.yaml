@@ -4,19 +4,11 @@ description: A Helm chart that deploys the K3S monitoring stack.
 type: application
 version: "0.0.1"
 dependencies:
-- name: alloy
-  version: "0.0.1"
+- name: kube-prometheus-stack
+  version: "75.6.1"
+  repository: https://prometheus-community.github.io/helm-charts
+  condition: kube-prometheus-stack.enabled
+- name: loki-stack
+  version: "2.10.2"
   repository: https://grafana.github.io/helm-charts
-  condition: alloy.enabled
-# - name: k3s-prometheus-stack
-#   version: "0.0.1"
-#   repository: file://./charts/k3s-prometheus-stack
-#   condition: kube-prometheus-stack.enabled
-# - name: k3s-grafana-agent
-#   version: "0.0.1"
-#   repository: file://./charts/k3s-grafana-agent
-#   condition: grafana-agent-operator.enabled
-# - name: k3s-loki-stack
-#   version: "0.0.1"
-#   repository: file://./charts/k3s-loki-stack
-#   condition: loki-stack.enabled
+  condition: loki-stack.enabled
