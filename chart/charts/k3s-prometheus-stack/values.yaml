@@ -7,17 +7,18 @@ enabled: true
 # This chart does not use the ingress provided by the kube-prometheus-stack chart.
 # Instead the ingress and certs are provided in the templates of this chart.
 grafanaIngress:
-  enabled: true
+  enabled: false
   ingressUrl: "grafana.example.com"
 
   certName: "grafana-example-com-tls"
   externalCert:
-    enabled: true
+    enabled: false
     secretName: "grafana-example-com-tls"
     secretStore: "kubernetes"
     secretStoreType: "ClusterSecretStore"
 
 kube-prometheus-stack:
+  enabled: true
   grafana:
     # Grafana is a dependancy of the kube-prometheus-stack chart, so we can configure it here
     # and all values will be directed towards the grafana chart.

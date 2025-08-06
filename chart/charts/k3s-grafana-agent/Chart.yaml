@@ -1,0 +1,10 @@
+apiVersion: v2
+name: k3s-grafana-agent
+description: A Helm chart that deploys the k3s-grafana-agent application.
+type: application
+version: "0.0.1"
+dependencies:
+- name: grafana-agent-operator
+  version: "0.5.1"
+  repository: https://grafana.github.io/helm-charts
+  condition: grafana-agent-operator.enabled

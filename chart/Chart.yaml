@@ -7,6 +7,12 @@ dependencies:
 - name: k3s-prometheus-stack
   version: "0.0.1"
   repository: file://./charts/k3s-prometheus-stack
-- name: k3s-grafana
+  condition: kube-prometheus-stack.enabled
+- name: k3s-grafana-agent
   version: "0.0.1"
-  repository: file://./charts/k3s-grafana
+  repository: file://./charts/k3s-grafana-agent
+  condition: grafana-agent-operator.enabled
+- name: k3s-loki-stack
+  version: "0.0.1"
+  repository: file://./charts/k3s-loki-stack
+  condition: loki-stack.enabled

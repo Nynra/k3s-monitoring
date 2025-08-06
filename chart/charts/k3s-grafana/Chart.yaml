@@ -1,9 +1,0 @@
-apiVersion: v2
-name: k3s-grafana
-description: A Helm chart that deploys the k3s-grafana application.
-type: application
-version: "0.0.1"
-dependencies:
-- name: grafana-operator
-  version: "v5.19.1"
-  repository: https://grafana.github.io/helm-charts

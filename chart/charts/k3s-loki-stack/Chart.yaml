@@ -1,0 +1,10 @@
+apiVersion: v2
+name: k3s-loki-stack
+description: A Helm chart that deploys the k3s-loki-stack application.
+type: application
+version: "0.0.1"
+dependencies:
+- name: loki-stack
+  version: "2.10.2"
+  repository: https://grafana.github.io/helm-charts
+  condition: loki-stack.enabled

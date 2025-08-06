@@ -1,0 +1,8 @@
+k3s-prometheus-stack:
+  enabled: false 
+
+k3s-grafana-agent:
+  enabled: true
+
+k3s-loki-stack:
+  enabled: false
