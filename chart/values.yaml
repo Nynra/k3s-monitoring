@@ -151,8 +151,12 @@ loki-stack:
   test_pod:
     enabled: true
 
+  # Values for loki chart
+  # https://github.com/grafana/loki/blob/main/production/helm/loki/values.yaml
   loki:
     enabled: true
+    # Diable authentication for loki
+    auth_enabled: false
     # Keep on false as prometheus is our default datasource
     isDefault: false
     url: http://{{(include "loki.serviceName" .)}}-loki.{{ .Release.Namespace }}.svc.cluster.local:{{ .Values.loki.service.port }}
