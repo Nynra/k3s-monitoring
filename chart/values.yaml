@@ -103,7 +103,7 @@ kube-prometheus-stack:
       #   version: 1
       - name: Prometheus 
         type: prometheus
-        url: http://{{ .Values.kube-prometheus-stack.nameOverride }}-prometheus.{{ .Release.Namespace }}:9090/
+        url: http://k3s-monitoring-kube-promet-prometheus.monitoring:9090/
         basicAuth: false
         basicAuthUser:
         basicAuthPassword:
@@ -115,7 +115,7 @@ kube-prometheus-stack:
           tlsAuthWithCACert: false
       - name: Loki
         type: loki
-        url: http://{{ .Release.Name }}-loki.{{ .Release.Namespace }}:3100/
+        url: http://k3s-monitoring-loki.monitoring:3100/
         basicAuth: false
         basicAuthUser:
         access: proxy
