@@ -155,7 +155,7 @@ loki-stack:
     enabled: true
     # Keep on false as prometheus is our default datasource
     isDefault: false
-    url: http://{{(include "loki.serviceName" .)}}.{{ .Release.Namespace }}.svc.cluster.local:{{ .Values.loki.service.port }}
+    url: http://{{(include "loki.serviceName" .)}}-loki.{{ .Release.Namespace }}.svc.cluster.local:{{ .Values.loki.service.port }}
     readinessProbe:
       httpGet:
         path: /ready
