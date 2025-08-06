@@ -50,8 +50,8 @@ kube-prometheus-stack:
       # ## Labels that should be matched kind: Grafana instance
       # matchLabels: { category: dashboard }
 
-      # ## Which folder all dashboards in Grafana General means on Root level
-      # folder: "default"
+      ## Which folder all dashboards in Grafana General means on Root level
+      folder: "General"
 
       # ## How frequently the operator should resync resources (in duration format)
       # ## Controls how often dashboards are reconciled by the operator
