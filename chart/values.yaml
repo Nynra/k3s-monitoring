@@ -28,6 +28,8 @@ kube-prometheus-stack:
     defaultDashboardsEnabled: true
     defaultDashboardsTimezone: utc
     defaultDashboardsInterval: 1m
+    defaultDashboardsEditable: true
+
 
     ingress: 
       enabled: false
@@ -74,8 +76,8 @@ kube-prometheus-stack:
 
       datasources: 
         enabled: true 
-        defaultDatasourceEnabled: false
-        isDefaultDatasource: false
+        defaultDatasourceEnabled: true
+        isDefaultDatasource: true
 
         # If not defined, will use prometheus.prometheusSpec.scrapeInterval or its default
         # defaultDatasourceScrapeInterval: 15s
@@ -87,38 +89,38 @@ kube-prometheus-stack:
           handleGrafanaManagedAlerts: false
           implementation: prometheus
 
-    additionalDataSources:
-      # - name: prometheus-sample
-      #   access: proxy
-      #   basicAuth: true
-      #   secureJsonData:
-      #       basicAuthPassword: pass
-      #   basicAuthUser: daco
-      #   editable: false
-      #   jsonData:
-      #       tlsSkipVerify: true
-      #   orgId: 1
+    additionalDataSources: []
+      # # - name: prometheus-sample
+      # #   access: proxy
+      # #   basicAuth: true
+      # #   secureJsonData:
+      # #       basicAuthPassword: pass
+      # #   basicAuthUser: daco
+      # #   editable: false
+      # #   jsonData:
+      # #       tlsSkipVerify: true
+      # #   orgId: 1
+      # #   type: prometheus
+      # #   url: https://{{ printf "%s-prometheus.svc" .Release.Name }}:9090
+      # #   version: 1
+      # - name: Prometheus 
       #   type: prometheus
-      #   url: https://{{ printf "%s-prometheus.svc" .Release.Name }}:9090
-      #   version: 1
-      - name: Prometheus 
-        type: prometheus
-        url: http://k3s-monitoring-kube-promet-prometheus.monitoring:9090/
-        basicAuth: false
-        basicAuthUser:
-        basicAuthPassword:
-        isDefault: true
-        editable: true
-        jsonData:
-          # graphiteVersion: "1.1"
-          tlsAuth: false
-          tlsAuthWithCACert: false
-      - name: Loki
-        type: loki
-        url: http://k3s-monitoring-loki.monitoring:3100/
-        basicAuth: false
-        basicAuthUser:
-        access: proxy
+      #   url: http://k3s-monitoring-kube-promet-prometheus.monitoring:9090/
+      #   basicAuth: false
+      #   basicAuthUser:
+      #   basicAuthPassword:
+      #   isDefault: true
+      #   editable: true
+      #   jsonData:
+      #     # graphiteVersion: "1.1"
+      #     tlsAuth: false
+      #     tlsAuthWithCACert: false
+      # - name: Loki
+      #   type: loki
+      #   url: http://k3s-monitoring-loki.monitoring:3100/
+      #   basicAuth: false
+      #   basicAuthUser:
+      #   access: proxy
 
     # Flag to mark provisioned data sources for deletion if they are no longer configured.
     # It takes no effect if data sources are already listed in the deleteDatasources section.
