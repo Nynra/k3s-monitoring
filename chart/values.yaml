@@ -44,29 +44,12 @@ kube-prometheus-stack:
     #   size: 20Gi
     #   finalizers:
     #     - kubernetes.io/pvc-protection
-
-    # Grafana Operator is End-of-Life and will be removed in future releases.
-    operator: 
-      ## Enable references to ConfigMaps containing dashboards in GrafanaDashboard CRs
-      ## Set to true to allow dashboards to be loaded from ConfigMap references
-      dashboardsConfigMapRefEnabled: false
-
-      # ## Labels that should be matched kind: Grafana instance
-      # matchLabels: { category: dashboard }
-
-      ## Which folder all dashboards in Grafana General means on Root level
-      folder: "General"
-
-      # ## How frequently the operator should resync resources (in duration format)
-      # ## Controls how often dashboards are reconciled by the operator
-      # ##
-      # resyncPeriod: 10m
     
     sidecar:
       dashboards: 
         enabled: true 
-        # label: grafana_dashboard
-        # labelValue: "true"
+        label: grafana_dashboard
+        labelValue: "true"
         searchNamespace: "all"
         # Support for new table panels, when enabled grafana auto migrates the old table panels to newer table panels
         enableNewTablePanelSyntax: false
