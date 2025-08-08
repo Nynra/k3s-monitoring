@@ -9,8 +9,10 @@ enabled: true
 grafanaIngress:
   enabled: true
   ingressUrl: "grafana.example.com"
-
   certName: "grafana-example-com-tls"
+  middlewares: 
+    - name: traefik-default-chain
+      namespace: traefik
   externalCert:
     enabled: true
     secretName: "grafana-example-com-tls"

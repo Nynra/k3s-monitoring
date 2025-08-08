@@ -22,6 +22,15 @@ spec:
   routes:
     - match: Host(`{{ .Values.grafanaIngress.ingressUrl }}`)
       kind: Rule
+      {{- if .Values.grafanaIngress.middlewares }}
+      middlewares:
+        {{- range .Values.grafanaIngress.middlewares }}
+        - name: {{ .name | quote }}
+          {{- if .namespace }}
+          namespace: {{ .namespace | quote }}
+          {{- end }}
+        {{- end }}
+      {{- end }}
       services:
         - name: "{{ .Release.Name }}-grafana"
           port: 80
