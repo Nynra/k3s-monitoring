@@ -41,5 +41,5 @@ spec:
           #     secure: true
           #     sameSite: none
   tls:
-    secretName: {{ .Values.grafanaIngress.certName | quote }}
+    secretName: grafana-tls
 {{- end }}{{- end }}
