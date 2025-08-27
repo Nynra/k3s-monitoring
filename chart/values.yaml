@@ -152,54 +152,54 @@ kube-prometheus-stack:
       #          storage: 50Gi
       #      selector: {}
 
-# loki-stack:
-#   enabled: true 
+loki-stack:
+  enabled: true 
 
-#   test_pod:
-#     enabled: true
+  test_pod:
+    enabled: true
 
-#   # Values for loki chart
-#   # https://github.com/grafana/loki/blob/main/production/helm/loki/values.yaml
-#   loki:
-#     enabled: true
-#     # Diable authentication for loki
-#     auth_enabled: false
-#     # Keep on false as prometheus is our default datasource
-#     isDefault: false
-#     # url: http://{{(include "loki.serviceName" .)}}-loki.{{ .Release.Namespace }}.svc.cluster.local
-#     readinessProbe:
-#       httpGet:
-#         path: /ready
-#         port: http-metrics
-#       initialDelaySeconds: 45
-#     livenessProbe:
-#       httpGet:
-#         path: /ready
-#         port: http-metrics
-#       initialDelaySeconds: 45
-#     datasource:
-#       jsonData: "{}"
-#       uid: ""
+  # Values for loki chart
+  # https://github.com/grafana/loki/blob/main/production/helm/loki/values.yaml
+  loki:
+    enabled: true
+    # Diable authentication for loki
+    auth_enabled: false
+    # Keep on false as prometheus is our default datasource
+    isDefault: false
+    # url: http://{{(include "loki.serviceName" .)}}-loki.{{ .Release.Namespace }}.svc.cluster.local
+    readinessProbe:
+      httpGet:
+        path: /ready
+        port: http-metrics
+      initialDelaySeconds: 45
+    livenessProbe:
+      httpGet:
+        path: /ready
+        port: http-metrics
+      initialDelaySeconds: 45
+    datasource:
+      jsonData: "{}"
+      uid: ""
 
-#   promtail:
-#     enabled: true
-#     config:
-#       logLevel: info
-#       serverPort: 3101
-#       # clients:
-#         # - url: http://{{ .Release.Name }}-loki.{{ .Release.Namespace }}.svc.cluster.local/loki/api/v1/push
+  promtail:
+    enabled: true
+    config:
+      logLevel: info
+      serverPort: 3101
+      # clients:
+        # - url: http://{{ .Release.Name }}-loki.{{ .Release.Namespace }}.svc.cluster.local/loki/api/v1/push
 
-#   fluent-bit:
-#     enabled: false
+  fluent-bit:
+    enabled: false
 
-#   grafana:
-#     enabled: false
+  grafana:
+    enabled: false
 
-#   prometheus:
-#     enabled: false
+  prometheus:
+    enabled: false
 
-#   filebeat:
-#     enabled: false
+  filebeat:
+    enabled: false
 
-#   logstash:
-#     enabled: false
+  logstash:
+    enabled: false
