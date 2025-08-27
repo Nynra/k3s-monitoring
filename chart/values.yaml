@@ -166,7 +166,7 @@ loki-stack:
     auth_enabled: false
     # Keep on false as prometheus is our default datasource
     isDefault: false
-    url: http://{{( .Values.Release.Name )}}-loki.{{ .Release.Namespace }}
+    url: http://{{( .Release.Name )}}-loki.{{ .Release.Namespace }}
     readinessProbe:
       httpGet:
         path: /ready
