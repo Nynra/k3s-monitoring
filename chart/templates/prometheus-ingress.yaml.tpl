@@ -18,13 +18,13 @@ metadata:
   {{- end }}
 spec:
   entryPoints:
-    - {{ .Values.grafanaIngress.entrypoint | default "websecure" | quote }}
+    - {{ .Values.prometheusIngress.entrypoint | default "websecure" | quote }}
   routes:
-    - match: Host(`{{ .Values.grafanaIngress.ingressUrl }}`)
+    - match: Host(`{{ .Values.prometheusIngress.ingressUrl }}`)
       kind: Rule
-      {{- if .Values.grafanaIngress.middlewares }}
+      {{- if .Values.prometheusIngress.middlewares }}
       middlewares:
-        {{- range .Values.grafanaIngress.middlewares }}
+        {{- range .Values.prometheusIngress.middlewares }}
         - name: {{ .name | quote }}
           {{- if .namespace }}
           namespace: {{ .namespace | quote }}
