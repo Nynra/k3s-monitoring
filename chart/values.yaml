@@ -98,6 +98,9 @@ grafana:
       - name: Prometheus
         type: prometheus
         url: http://{{ .Release.Name }}-prometheus-server
+      - name: Loki
+        type: loki
+        url: http://{{ .Release.Name }}-loki:3100
   #      access: proxy
   #      isDefault: true
   #    - name: CloudWatch
@@ -150,6 +153,10 @@ grafana:
         gnetId: 15661
         revision: 2
         datasource: Prometheus
+      loki-promtail:
+        gnetid: 14055
+        revision: 5
+        datasource: Loki
 
   # grafana.ini:
   #   server:
@@ -249,10 +256,10 @@ loki:
     resources:
       limits:
         cpu: 3
-        memory: 4Gi
+        memory: 2Gi
       requests:
         cpu: 2
-        memory: 2Gi
+        memory: 1Gi
     extraEnv:
       # Keep a little bit lower than memory limits
       - name: GOMEMLIMIT
