@@ -38,6 +38,9 @@ grafana:
     #      name: configmap-name
     #      key: value_key
 
+  deploymentStrategy:
+    type: Recreate
+
   service:
     enabled: true
     type: ClusterIP
