@@ -147,7 +147,6 @@ prometheus:
   enabled: true
 
   server:
-    name: prometheus-server
     global:
       ## How frequently to scrape targets by default
       scrape_interval: 1m
