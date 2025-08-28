@@ -49,6 +49,13 @@ grafana:
   deploymentStrategy:
     type: Recreate
 
+  sidecar:
+    dashboards:
+      enabled: true
+      label: grafana_dashboard
+      labelValue: "1"
+      defaultFolderName: provisioned
+
   service:
     enabled: true
     type: ClusterIP
