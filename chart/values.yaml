@@ -58,7 +58,7 @@ grafana:
   #    memory: 128Mi
 
   persistence:
-    enabled: false 
+    enabled: true 
     size: 5Gi
 
   ## Pass the plugins you want installed as a list.
