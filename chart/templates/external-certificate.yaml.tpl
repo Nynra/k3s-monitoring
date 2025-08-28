@@ -1,4 +1,4 @@
-{{- if .Values.enabled }}{{- if .Values.grafanaIngress.cert.externalSecret.enabled }}
+{{- if .Values.enabled }}{{- if .Values.cert.externalSecret.enabled }}
 apiVersion: external-secrets.io/v1
 kind: ExternalSecret
 metadata:
@@ -18,20 +18,20 @@ metadata:
 spec:
   secretStoreRef:
     kind: ClusterSecretStore
-    name: {{ .Values.grafanaIngress.cert.externalSecret.secretStore | quote }}
+    name: {{ .Values.cert.externalSecret.secretStore | quote }}
   target:
     creationPolicy: Owner
   data:
     - secretKey: tls.crt
       remoteRef:
-        key: {{ .Values.grafanaIngress.cert.externalSecret.secretName | quote }}
+        key: {{ .Values.cert.externalSecret.secretName | quote }}
         property: tls_crt
         conversionStrategy: Default	
         decodingStrategy: None
         metadataPolicy: None
     - secretKey: tls.key
       remoteRef:
-        key: {{ .Values.grafanaIngress.cert.externalSecret.secretName | quote }}
+        key: {{ .Values.cert.externalSecret.secretName | quote }}
         property: tls_key
         conversionStrategy: Default	
         decodingStrategy: None

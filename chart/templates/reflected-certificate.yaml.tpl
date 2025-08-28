@@ -1,5 +1,5 @@
 {{ if .Values.enabled }}
-{{ if .Values.grafanaIngress.cert.reflectedSecret.enabled }}
+{{ if .Values.cert.reflectedSecret.enabled }}
 apiVersion: v1
 kind: Secret
 metadata:

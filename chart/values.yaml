@@ -6,22 +6,30 @@ enabled: true
 
 # This chart does not use the ingress provided by the kube-prometheus-stack chart.
 # Instead the ingress and certs are provided in the templates of this chart.
+cert:
+  externalSecret:
+    enabled: false
+    secretName: "grafana-example-com-tls"
+    secretStore: "kubernetes"
+    secretStoreType: "ClusterSecretStore"
+  reflectedSecret:
+    enabled: true
+    originNamespace: "cert-manager"
+    originSecretName: "grafana-example-com-tls"
+
 grafanaIngress:
   enabled: false
   ingressUrl: "grafana.example.com"
   middlewares: 
     - name: traefik-default-chain
       namespace: traefik
-  cert:
-    externalSecret:
-      enabled: false
-      secretName: "grafana-example-com-tls"
-      secretStore: "kubernetes"
-      secretStoreType: "ClusterSecretStore"
-    reflectedSecret:
-      enabled: true
-      originNamespace: "cert-manager"
-      originSecretName: "grafana-example-com-tls"
+
+prometheusIngress:
+  enabled: false
+  ingressUrl: "prometheus.example.com"
+  middlewares: 
+    - name: traefik-default-chain
+      namespace: traefik
 
 # https://github.com/grafana/helm-charts/blob/main/charts/grafana/values.yaml
 grafana: 
