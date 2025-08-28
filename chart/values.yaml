@@ -59,7 +59,7 @@ grafana:
 
   persistence:
     enabled: false 
-    size: 10Gi
+    size: 5Gi
 
   ## Pass the plugins you want installed as a list.
   ##
