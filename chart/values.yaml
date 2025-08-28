@@ -144,25 +144,24 @@ grafana:
 
 
 prometheus:
-  enabled: false
+  enabled: true
+
   server:
+    name: prometheus-server
     global:
       ## How frequently to scrape targets by default
-      ##
       scrape_interval: 1m
       ## How long until a scrape request times out
-      ##
       scrape_timeout: 10s
       ## How frequently to evaluate rules
-      ##
       evaluation_interval: 1m
   
     ingress:
       enabled: false
 
     persistentVolume:
-      enabled: false
-      size: 8Gi
+      enabled: true
+      size: 10Gi
     
     replicaCount: 1
 
@@ -190,7 +189,15 @@ prometheus:
       ## externalTrafficPolicy is applicable to service with externally-facing addresses (NodePorts, ExternalIPs, and LoadBalancer IPs)
       externalTrafficPolicy: ""
 
-    prometheus.yml:
+  networkPolicy:
+    ## Enable creation of NetworkPolicy resources.
+    enabled: false
+
+  ## alertmanager sub-chart configurable values
+  ## Please see https://github.com/prometheus-community/helm-charts/tree/main/charts/alertmanager
+  alertmanager:
+    ## If false, alertmanager will not be installed
+    enabled: false
       
 loki:
   enabled: false
