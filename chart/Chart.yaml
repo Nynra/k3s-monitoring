@@ -4,30 +4,30 @@ description: A Helm chart that deploys the K3S monitoring stack.
 type: application
 version: "0.0.1"
 dependencies:
-- name: grafana
-  version: 9.3.6
-  repository: https://grafana.github.io/helm-charts
-  condition: grafana.enabled
-- name: prometheus
-  version: 27.32.0
-  repository: https://prometheus-community.github.io/helm-charts
-  condition: prometheus.enabled
+# - name: grafana
+#   version: 9.3.6
+#   repository: https://grafana.github.io/helm-charts
+#   condition: grafana.enabled
+# - name: prometheus
+#   version: 27.32.0
+#   repository: https://prometheus-community.github.io/helm-charts
+#   condition: prometheus.enabled
 - name: loki
   version: 6.38.0
   repository: https://grafana.github.io/helm-charts
   condition: loki.enabled
-- name: k8s-monitoring
-  version: 1.6.46
-  repository: https://grafana.github.io/helm-charts
-  condition: k8s-monitoring.enabled
+# - name: k8s-monitoring
+#   version: 1.6.46
+#   repository: https://grafana.github.io/helm-charts
+#   condition: k8s-monitoring.enabled
 # - name: alloy
 #   version: 0.3.0
 #   repository: https://alloydb.github.io/helm-charts
 #   condition: alloy.enabled
-# - name: kube-prometheus-stack
-#   version: "75.6.1"
-#   repository: https://prometheus-community.github.io/helm-charts
-#   condition: kube-prometheus-stack.enabled
+- name: kube-prometheus-stack
+  version: "75.6.1"
+  repository: https://prometheus-community.github.io/helm-charts
+  condition: kube-prometheus-stack.enabled
 # - name: loki-stack
 #   version: "2.10.2"
 #   repository: https://grafana.github.io/helm-charts
