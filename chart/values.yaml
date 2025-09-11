@@ -34,7 +34,7 @@ prometheusIngress:
 kube-prometheus-stack:
   enabled: true
 
-  nameOverride: "kube-prometheus-stack"
+  nameOverride: "prometheus"
   grafana:
     # Grafana is a dependancy of the kube-prometheus-stack chart, so we can configure it here
     # and all values will be directed towards the grafana chart.
