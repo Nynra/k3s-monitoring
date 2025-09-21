@@ -174,7 +174,7 @@ loki-stack:
     auth_enabled: false
     # Keep on false as prometheus is our default datasource
     isDefault: false
-    url: http://{{( .Release.Name )}}-loki.{{ .Release.Namespace }}.svc:3100
+    url: http://{{( .Release.Name )}}-loki.svc:3100
     readinessProbe:
       httpGet:
         path: /ready
@@ -195,7 +195,7 @@ loki-stack:
       logLevel: info
       serverPort: 3101
       clients:
-        - url: http://{{ .Release.Name }}-loki.{{ .Release.Namespace }}/loki/api/v1/push
+        - url: http://{{ .Release.Name }}-loki.svc/loki/api/v1/push
 
   fluent-bit:
     enabled: false
