@@ -161,7 +161,7 @@ kube-prometheus-stack:
       #      selector: {}
 
 loki-stack:
-  enabled: true 
+  enabled: false 
 
   test_pod:
     enabled: true
