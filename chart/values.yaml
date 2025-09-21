@@ -4,6 +4,9 @@ global:
 
 enabled: true
 
+networkPolicy:
+  enabled: false
+
 cert:
   externalSecret:
     enabled: false
